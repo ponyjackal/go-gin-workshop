@@ -6,12 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	r := gin.New()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Hello World!",
-		})
+func IndexHandler(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "hello world",
 	})
-	r.Run()
+}
+
+func main() {
+	router := gin.Default()
+	router.GET("/", IndexHandler)
+	http.ListenAndServe(":8080", router)
 }
